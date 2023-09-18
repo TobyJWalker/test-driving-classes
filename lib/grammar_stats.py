@@ -3,12 +3,11 @@ class GrammarStats:
         pass
 
     def check(self, text):
-        # Parameters:
-        #   text: string
-        # Returns:
-        #   bool: true if the text begins with a capital letter and ends with a
-        #         sentence-ending punctuation mark, false otherwise
-        pass
+        if type(text) != str:
+            raise TypeError("text must be a string")
+        elif not text[0].isupper() or text[-1] not in [".", "?", "!"]:
+            return False
+        return True
 
     def percentage_good(self):
         # Returns:
