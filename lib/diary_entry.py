@@ -6,6 +6,7 @@ class DiaryEntry:
             raise TypeError("contents must be a string")
         self.title = title
         self.contents = contents
+        self.unread_contents = contents
 
     def format(self):
         return f"{self.title}: {self.contents}"
@@ -19,16 +20,14 @@ class DiaryEntry:
         return self.count_words() / wpm
     
     def reading_chunk(self, wpm, minutes):
-        # Parameters
-        #   wpm: an integer representing the number of words the user can read
-        #        per minute
-        #   minutes: an integer representing the number of minutes the user has
-        #            to read
-        # Returns:
-        #   string: a chunk of the contents that the user could read in the
-        #           given number of minutes
-        #
-        # If called again, `reading_chunk` should return the next chunk,
-        # skipping what has already been read, until the contents is fully read.
-        # The next call after that should restart from the beginning.
-        pass
+        words = minutes * wpm
+        word_list = self.unread_contents.split()
+
+        if words >= len(word_list):
+            self.unread_contents = self.contents
+            return " ".join(word_list)
+        else:
+            chunk = " ".join(word_list[:words])
+            self.unread_contents = " ".join(word_list[words:])
+            return chunk
+        

@@ -40,3 +40,34 @@ def test_diary_entry_reading_time_eight_words():
 def test_diary_entry_reading_time_no_words():
     entry = DiaryEntry("My Title", "")
     assert entry.reading_time(4) == 0
+
+def test_unread_contents():
+    entry = DiaryEntry("My Title", "These are the contents")
+    assert entry.unread_contents == "These are the contents"
+
+def test_reading_chunk_displays_full_contents():
+    entry = DiaryEntry("My Title", "One two")
+    assert entry.reading_chunk(2, 1) == "One two"
+
+def test_reading_chunk_displays_next_contents():
+    entry = DiaryEntry("My Title", "One two three four")
+    entry.reading_chunk(2, 1)
+    assert entry.reading_chunk(2, 1) == "three four"
+
+def test_reading_chunk_displays_remaining_contents():
+    entry = DiaryEntry("My Title", "One two three four five six")
+    entry.reading_chunk(2, 1)
+    entry.reading_chunk(2, 1)
+    assert entry.reading_chunk(2, 1) == "five six"
+
+def test_reading_chunk_resets_unread_contents():
+    entry = DiaryEntry("My Title", "One two three four")
+    entry.reading_chunk(2, 1)
+    entry.reading_chunk(2, 1)
+    assert entry.unread_contents == "One two three four"
+
+def test_reading_chunk_displays_first_contents_after_reset():
+    entry = DiaryEntry("My Title", "One two three four")
+    entry.reading_chunk(2, 1)
+    entry.reading_chunk(2, 1)
+    assert entry.reading_chunk(2, 1) == "One two"
