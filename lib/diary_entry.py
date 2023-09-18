@@ -14,14 +14,10 @@ class DiaryEntry:
         return len(self.contents.split())
 
     def reading_time(self, wpm):
-        # Parameters:
-        #   wpm: an integer representing the number of words the user can read 
-        #        per minute
-        # Returns:
-        #   int: an estimate of the reading time in minutes for the contents at
-        #        the given wpm.
-        pass
-
+        if type(wpm) != int:
+            raise TypeError("wpm must be an integer")
+        return self.count_words() / wpm
+    
     def reading_chunk(self, wpm, minutes):
         # Parameters
         #   wpm: an integer representing the number of words the user can read

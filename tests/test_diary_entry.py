@@ -22,3 +22,21 @@ def test_diary_entry_count_five_words():
 def test_diary_entry_count_no_words():
     entry = DiaryEntry("My Title", "")
     assert entry.count_words() == 0
+
+def test_diary_entry_wpm_not_int():
+    entry = DiaryEntry("My Title", "These are the contents")
+    with pytest.raises(TypeError) as e:
+        entry.reading_time(None)
+    assert str(e.value) == "wpm must be an integer"
+
+def test_diary_entry_reading_time_four_words():
+    entry = DiaryEntry("My Title", "These are the contents")
+    assert entry.reading_time(4) == 1
+
+def test_diary_entry_reading_time_eight_words():
+    entry = DiaryEntry("My Title", "One two three four five six seven eight")
+    assert entry.reading_time(4) == 2
+
+def test_diary_entry_reading_time_no_words():
+    entry = DiaryEntry("My Title", "")
+    assert entry.reading_time(4) == 0
