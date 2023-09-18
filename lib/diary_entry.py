@@ -11,9 +11,7 @@ class DiaryEntry:
         return f"{self.title}: {self.contents}"
 
     def count_words(self):
-        # Returns:
-        #   int: the number of words in the diary entry
-        pass
+        return len(self.contents.split())
 
     def reading_time(self, wpm):
         # Parameters:

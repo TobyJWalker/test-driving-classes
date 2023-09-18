@@ -14,3 +14,11 @@ def test_diary_entry_content_not_string():
 def test_diary_entry_format():
     entry = DiaryEntry("My Title", "These are the contents")
     assert entry.format() == "My Title: These are the contents"
+
+def test_diary_entry_count_five_words():
+    entry = DiaryEntry("My Title", "One two three four five")
+    assert entry.count_words() == 5
+
+def test_diary_entry_count_no_words():
+    entry = DiaryEntry("My Title", "")
+    assert entry.count_words() == 0
