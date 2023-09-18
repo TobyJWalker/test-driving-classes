@@ -1,16 +1,16 @@
 class GrammarStats:
     def __init__(self):
-        pass
+        self.errors = 0
+        self.correct = 0
 
     def check(self, text):
         if type(text) != str:
             raise TypeError("text must be a string")
         elif not text[0].isupper() or text[-1] not in [".", "?", "!"]:
+            self.errors += 1
             return False
+        self.correct += 1
         return True
 
     def percentage_good(self):
-        # Returns:
-        #   int: the percentage of texts checked so far that passed the check
-        #        defined in the `check` method. The number 55 represents 55%.
-        pass
+        return (self.correct / (self.correct + self.errors)) * 100

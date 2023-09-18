@@ -22,3 +22,23 @@ def test_grammar_stats_last_char_punctuation():
 def test_grammar_stats_last_char_not_punctuation():
     stats = GrammarStats()
     assert stats.check("Hello") == False
+
+def test_grammar_stats_percent_good_all_correct():
+    stats = GrammarStats()
+    stats.check("Hello!")
+    stats.check("Hello!")
+    stats.check("Hello!")
+    assert stats.percentage_good() == 100
+
+def test_grammar_stats_percent_good_all_incorrect():
+    stats = GrammarStats()
+    stats.check("hello")
+    stats.check("hello!")
+    stats.check("Hello")
+    assert stats.percentage_good() == 0
+
+def test_grammar_stats_percent_half_correct():
+    stats = GrammarStats()
+    stats.check("Hello!")
+    stats.check("hello")
+    assert stats.percentage_good() == 50
