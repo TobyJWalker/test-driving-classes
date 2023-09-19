@@ -3,7 +3,7 @@ from lib.task_tracker import *
 
 def test_task_tracker_initiaton():
     task_tracker = TaskTracker()
-    assert task_tracker.tasks == []
+    assert task_tracker._tasks == []
 
 def test_task_tracker_add_task_number():
     with pytest.raises(TypeError) as e:
@@ -38,13 +38,13 @@ def test_task_tracker_add_task_space():
 def test_task_tracker_add_task():
     tracker = TaskTracker()
     tracker.add_task("Do the dishes")
-    assert tracker.tasks == ["Do the dishes"]
+    assert tracker._tasks == ["Do the dishes"]
 
 def test_task_tracker_add_task_multiple():
     tracker = TaskTracker()
     tracker.add_task("Do the dishes")
     tracker.add_task("Do the laundry")
-    assert tracker.tasks == ["Do the dishes", "Do the laundry"]
+    assert tracker._tasks == ["Do the dishes", "Do the laundry"]
 
 def test_task_tracker_get_tasks():
     tracker = TaskTracker()
@@ -80,18 +80,18 @@ def test_task_tracker_mark_complete():
     tracker = TaskTracker()
     tracker.add_task("Do the dishes")
     tracker.mark_complete("Do the dishes")
-    assert tracker.tasks == []
+    assert tracker._tasks == []
 
 def task_tracker_mark_complete_multiple():
     tracker = TaskTracker()
     tracker.add_task("Do the dishes")
     tracker.add_task("Do the laundry")
     tracker.mark_complete("Do the dishes")
-    assert tracker.tasks == ["Do the laundry"]
+    assert tracker._tasks == ["Do the laundry"]
 
 def task_tracker_mark_complete_repeated():
     tracker = TaskTracker()
     tracker.add_task("Do the dishes")
     tracker.add_task("Do the dishes")
     tracker.mark_complete("Do the dishes")
-    assert tracker.tasks == []
+    assert tracker._tasks == []
