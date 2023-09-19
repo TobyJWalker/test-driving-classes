@@ -83,3 +83,10 @@ tracker.add_task('task 1')
 tracker.add_task('task 2')
 tracker.mark_task_complete('task 1')
 tracker.get_tasks() => ['task 2']
+
+>> When marking a task as complete, remove all instances of that task
+tracker = TaskTracker()
+tracker.add_task('task 1')
+tracker.add_task('task 1')
+tracker.mark_task_complete('task 1')
+tracker.get_tasks() => []
